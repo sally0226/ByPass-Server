@@ -37,7 +37,7 @@ export class WalletUser {
   @Property({ onUpdate: () => new Date() })
   updatedAt: Date = new Date();
 
-  [PrimaryKeyProp]: ['user', 'group'];
+  [PrimaryKeyProp]: ['user', 'wallet'];
 
   [EntityRepositoryType]?: WalletUserRepository;
 }

@@ -23,7 +23,7 @@ export class AuthController {
   ): Promise<void> {
     const accessToken = await this.authService.oAuthLogin(oauthUser);
 
-    res.cookie('Authorization', 'Bearer ' + accessToken, getCookieOption());
+    res.cookie('Authorization', accessToken, getCookieOption());
     return res.redirect(
       302,
       this.configService.get('CLIENT_REDIRECT_URL') + '?token=' + accessToken,

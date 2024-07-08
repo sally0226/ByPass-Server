@@ -1,24 +1,6 @@
-import {
-  Wallet,
-  WalletRole,
-  WalletRoleValueType,
-  WalletUser,
-} from 'src/entities';
+import { Wallet, WalletUser } from 'src/entities';
 import { ApiProperty } from '@nestjs/swagger';
-
-export class WalletUserResponseDto implements Partial<WalletUser> {
-  @ApiProperty()
-  id: number;
-
-  @ApiProperty()
-  username: string;
-
-  @ApiProperty()
-  profileImage: string;
-
-  @ApiProperty({ enum: WalletRole })
-  role: WalletRoleValueType;
-}
+import { UserForWalletDto } from 'src/wallet/dtos/user-for-wallet.dto';
 
 export class WalletResponseDto implements Partial<Wallet> {
   @ApiProperty()
@@ -39,6 +21,18 @@ export class WalletResponseDto implements Partial<Wallet> {
   @ApiProperty()
   bankCode: string;
 
-  @ApiProperty({ type: WalletUserResponseDto, isArray: true })
-  users: WalletUserResponseDto[];
+  @ApiProperty({ type: UserForWalletDto, isArray: true })
+  users: UserForWalletDto[];
+
+  constructor(wallet: Wallet) {
+    this.id = wallet.id;
+    this.name = wallet.name;
+    this.createdAt = wallet.createdAt;
+    this.updatedAt = wallet.updatedAt;
+    this.accountNumber = wallet.accountNumber;
+    this.bankCode = wallet.bank.code;
+    this.users = wallet.walletUsers
+      .getItems()
+      .map((item: WalletUser) => new UserForWalletDto(item));
+  }
 }

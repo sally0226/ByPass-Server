@@ -16,4 +16,12 @@ export class UserResponseDto implements Partial<User> {
 
   @ApiProperty()
   updatedAt: Date;
+
+  constructor(user: User) {
+    this.id = user.id;
+    this.username = user.username;
+    this.profileImage = user.profileImage;
+    this.createdAt = user.createdAt;
+    this.updatedAt = user.updatedAt;
+  }
 }

@@ -1,12 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Bank } from 'src/entities';
 
-export class BankResponseDto {
+export class BankResponseDto implements Partial<Bank> {
   @ApiProperty()
-  code: number;
+  code: string;
 
   @ApiProperty()
   name: string;
 
   @ApiProperty()
-  icon: string;
+  iconURL: string;
+
+  constructor(bank: Bank) {
+    this.code = bank.code;
+    this.name = bank.name;
+    this.iconURL = bank.iconUrl;
+  }
 }

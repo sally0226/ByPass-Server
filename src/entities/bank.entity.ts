@@ -1,13 +1,10 @@
 import {
-  Collection,
   Entity,
   EntityRepositoryType,
-  OneToMany,
   PrimaryKey,
   Property,
 } from '@mikro-orm/core';
 import { BankRepository } from 'src/entities/bank.repository';
-import { Wallet } from 'src/entities/wallet.entity';
 
 @Entity({ repository: () => BankRepository })
 export class Bank {
