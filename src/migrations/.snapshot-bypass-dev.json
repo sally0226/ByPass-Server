@@ -3,6 +3,53 @@
   "tables": [
     {
       "columns": {
+        "code": {
+          "name": "code",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        },
+        "icon_url": {
+          "name": "icon_url",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        }
+      },
+      "name": "bank",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "code"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
         "id": {
           "name": "id",
           "type": "int",
@@ -108,6 +155,15 @@
       "columns": {
         "id": {
           "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "name": {
+          "name": "name",
           "type": "varchar(255)",
           "unsigned": false,
           "autoincrement": false,
@@ -115,8 +171,17 @@
           "nullable": false,
           "mappedType": "string"
         },
-        "name": {
-          "name": "name",
+        "account_number": {
+          "name": "account_number",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        },
+        "bank_code": {
+          "name": "bank_code",
           "type": "varchar(255)",
           "unsigned": false,
           "autoincrement": false,
@@ -148,6 +213,16 @@
       "name": "wallet",
       "indexes": [
         {
+          "columnNames": [
+            "bank_code"
+          ],
+          "composite": false,
+          "keyName": "wallet_bank_code_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
           "keyName": "PRIMARY",
           "columnNames": [
             "id"
@@ -159,7 +234,20 @@
         }
       ],
       "checks": [],
-      "foreignKeys": {},
+      "foreignKeys": {
+        "wallet_bank_code_foreign": {
+          "constraintName": "wallet_bank_code_foreign",
+          "columnNames": [
+            "bank_code"
+          ],
+          "localTableName": "wallet",
+          "referencedColumnNames": [
+            "code"
+          ],
+          "referencedTableName": "bank",
+          "updateRule": "cascade"
+        }
+      },
       "nativeEnums": {}
     },
     {
@@ -175,12 +263,12 @@
         },
         "wallet_id": {
           "name": "wallet_id",
-          "type": "varchar(255)",
-          "unsigned": false,
+          "type": "int",
+          "unsigned": true,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "mappedType": "string"
+          "mappedType": "integer"
         },
         "role": {
           "name": "role",

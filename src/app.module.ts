@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { WalletModule } from './wallet/wallet.module';
 import { envValidate } from 'src/config/env.validation';
+import { BankModule } from './bank/bank.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { envValidate } from 'src/config/env.validation';
     UserModule,
     MikroOrmModule.forRoot(),
     WalletModule,
+    BankModule,
   ],
   controllers: [AppController],
   providers: [AppService],

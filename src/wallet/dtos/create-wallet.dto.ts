@@ -6,4 +6,13 @@ export class CreateWalletDTO {
   @IsNotEmpty()
   @IsString()
   name: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  accountNumber: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  bankCode: string;
 }

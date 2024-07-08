@@ -5,7 +5,9 @@ import { OAuthLoginUser } from 'src/common/decorators/kakao-info.decorator';
 import { OAuthUser } from 'src/common/types/oauth.type';
 import { ConfigService } from '@nestjs/config';
 import { getCookieOption } from 'src/common/helpers/cookie.helper';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -22,7 +24,9 @@ export class AuthController {
     const accessToken = await this.authService.oAuthLogin(oauthUser);
 
     res.cookie('Authorization', 'Bearer ' + accessToken, getCookieOption());
-
-    return res.redirect(302, this.configService.get('CLIENT_REDIRECT_URL'));
+    return res.redirect(
+      302,
+      this.configService.get('CLIENT_REDIRECT_URL') + '?token=' + accessToken,
+    );
   }
 }

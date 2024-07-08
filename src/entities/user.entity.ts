@@ -1,11 +1,14 @@
 import {
+  Collection,
   Entity,
   EntityRepositoryType,
+  OneToMany,
   PrimaryKey,
   Property,
 } from '@mikro-orm/core';
 import { UserRepository } from './user.repository';
 import { OAuthProviderType } from 'src/common/types/oauth.type';
+import { WalletUser } from 'src/entities/wallet-user.entity';
 
 @Entity({ repository: () => UserRepository })
 export class User {
@@ -35,6 +38,12 @@ export class User {
 
   @Property({ onUpdate: () => new Date() })
   updatedAt: Date = new Date();
+
+  @OneToMany({
+    entity: () => WalletUser,
+    mappedBy: (walletUser: WalletUser) => walletUser.user,
+  })
+  walletUsers: Collection<WalletUser> = new Collection<WalletUser>(this);
 
   [EntityRepositoryType]?: UserRepository;
 }

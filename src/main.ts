@@ -10,6 +10,7 @@ async function bootstrap() {
     .setTitle('ByPass API')
     .setDescription('스쳐가는머니(ByPass) API Docs')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
