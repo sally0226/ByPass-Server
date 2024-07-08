@@ -5,7 +5,7 @@ import { OAuthLoginUser } from 'src/common/decorators/kakao-info.decorator';
 import { OAuthUser } from 'src/common/types/oauth.type';
 import { ConfigService } from '@nestjs/config';
 import { getCookieOption } from 'src/common/helpers/cookie.helper';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -16,6 +16,7 @@ export class AuthController {
   ) {}
 
   @Get('login/kakao')
+  @ApiOperation({ summary: '카카오 소셜 로그인 ✅' })
   @UseGuards(KakaoGuard)
   async kakaoSignIn(
     @OAuthLoginUser() oauthUser: OAuthUser,
