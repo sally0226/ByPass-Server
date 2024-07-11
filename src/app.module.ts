@@ -8,12 +8,13 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { WalletModule } from './wallet/wallet.module';
 import { envValidate } from 'src/config/env.validation';
 import { BankModule } from './bank/bank.module';
+import { getNodeEnv } from 'src/config/env.helper';
 
 @Module({
   imports: [
     AuthModule,
     ConfigModule.forRoot({
-      envFilePath: `${__dirname}/../.env`,
+      envFilePath: `${__dirname}/../.env.${getNodeEnv}`,
       isGlobal: true,
       validate: envValidate,
       cache: true,

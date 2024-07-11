@@ -1,6 +1,5 @@
 import { plainToInstance } from 'class-transformer';
 import {
-  IsEnum,
   IsNumber,
   Max,
   Min,
@@ -9,13 +8,14 @@ import {
   MinLength,
 } from 'class-validator';
 
-enum Environment {
-  Development = 'development',
-  Production = 'production',
-}
+export const environment = [
+  'development' as string,
+  'staging' as string,
+  'production' as string,
+] as const;
+export type Environment = (typeof environment)[number];
 
 class EnvironmentVariables {
-  @IsEnum(Environment)
   NODE_ENV: Environment;
 
   @IsNumber()

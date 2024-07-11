@@ -1,0 +1,19 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./certs:/etc/nginx/certs
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - nestjs
+
+  nestjs:
+    image: docker.io/sally0226/bypass:dev
+    ports:
+      - "3000:3000"
+    entrypoint: ["/bin/sh", "-c", "pnpm start:staging"]
