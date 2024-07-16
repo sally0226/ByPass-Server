@@ -31,8 +31,9 @@ export class WalletResponseDto implements Partial<Wallet> {
     this.updatedAt = wallet.updatedAt;
     this.accountNumber = wallet.accountNumber;
     this.bankCode = wallet.bank.code;
-    this.users = wallet.walletUsers
-      .getItems()
-      .map((item: WalletUser) => new UserForWalletDto(item));
+    if (wallet.walletUsers.isInitialized())
+      this.users = wallet.walletUsers
+        .getItems()
+        .map((item: WalletUser) => new UserForWalletDto(item));
   }
 }

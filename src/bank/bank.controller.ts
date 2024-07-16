@@ -9,11 +9,11 @@ import { Bank } from 'src/entities';
 export class BankController {
   constructor(private readonly bankService: BankService) {}
 
-  @Get('banks')
+  @Get('')
   @ApiOkResponse({ type: [BankResponseDto] })
   @ApiOperation({ summary: '은행 코드 및 아이콘 리스트 ✅' })
   async findAll(): Promise<BankResponseDto[]> {
     const banks: Bank[] = await this.bankService.findAll();
-    return banks.map((item) => new BankResponseDto(item));
+    return banks.map((item: Bank) => new BankResponseDto(item));
   }
 }

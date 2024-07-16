@@ -9,6 +9,7 @@ import { WalletModule } from './wallet/wallet.module';
 import { envValidate } from 'src/config/env.validation';
 import { BankModule } from './bank/bank.module';
 import { getNodeEnv } from 'src/config/env.helper';
+import { InviteLinkModule } from './invite-link/invite-link.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { getNodeEnv } from 'src/config/env.helper';
     MikroOrmModule.forRoot(),
     WalletModule,
     BankModule,
+    InviteLinkModule,
   ],
   controllers: [AppController],
   providers: [AppService],

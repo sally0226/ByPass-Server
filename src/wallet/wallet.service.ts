@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateWalletDTO } from 'src/wallet/dtos/create-wallet.dto';
 import {
   Bank,
@@ -50,5 +50,22 @@ export class WalletService {
       { user: user },
       { populate: ['wallet'] },
     );
+  }
+
+  async findOne(id: number): Promise<Wallet> {
+    return await this.walletRepository.findOne({ id });
+  }
+
+  async findWalletUser(user: User, id: number): Promise<WalletUser> {
+    const walletUser = await this.walletUserRepository.findOne({
+      user,
+      wallet: { id: id },
+    });
+
+    if (!walletUser) {
+      throw new NotFoundException('존재하지 않는 멤버입니다.');
+    }
+
+    return walletUser;
   }
 }

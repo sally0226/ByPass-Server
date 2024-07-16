@@ -8,8 +8,8 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "migrate:create": "dotenv -e .env -- npx mikro-orm migration:create",
-    "migrate:up": "dotenv -e .env -- npx mikro-orm migration:up",
+    "migrate:create": "dotenv -e .env.development -- npx mikro-orm migration:create",
+    "migrate:up": "dotenv -e .env.development -- npx mikro-orm migration:up",
     "start": "nest start",
     "start:dev": "export NODE_ENV=development&& nest start --watch",
     "start:debug": "export NODE_ENV=development&& nest start --debug --watch",

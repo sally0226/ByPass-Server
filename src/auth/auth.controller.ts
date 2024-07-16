@@ -1,7 +1,7 @@
 import { Controller, Get, Res, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { KakaoGuard } from 'src/common/guards/kakao.guard';
-import { OAuthLoginUser } from 'src/common/decorators/kakao-info.decorator';
+import { OAuthLoginUser } from 'src/common/decorators/oauth-user.decorator';
 import { OAuthUser } from 'src/common/types/oauth.type';
 import { ConfigService } from '@nestjs/config';
 import { getCookieOption } from 'src/common/helpers/cookie.helper';

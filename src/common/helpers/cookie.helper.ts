@@ -14,6 +14,6 @@ export const getCookieOption = (): CookieOptions => {
     secure: true,
     path: '/',
     maxAge: 360000,
-    domain: '.bypass어쩌구.com',
+    domain: '.bypass-zigab.com',
   };
 };
