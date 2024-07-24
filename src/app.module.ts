@@ -8,7 +8,7 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { WalletModule } from './wallet/wallet.module';
 import { envValidate } from 'src/config/env.validation';
 import { BankModule } from './bank/bank.module';
-import { getNodeEnv } from 'src/config/env.helper';
+import { getNodeEnv, ignoreEnvFile } from 'src/config/env.helper';
 import { InviteLinkModule } from './invite-link/invite-link.module';
 
 @Module({
@@ -19,6 +19,7 @@ import { InviteLinkModule } from './invite-link/invite-link.module';
       isGlobal: true,
       validate: envValidate,
       cache: true,
+      ignoreEnvFile: ignoreEnvFile,
     }),
     UserModule,
     MikroOrmModule.forRoot(),

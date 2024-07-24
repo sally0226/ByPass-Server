@@ -10,7 +10,6 @@ import {
 
 export const environment = [
   'development' as string,
-  'staging' as string,
   'production' as string,
 ] as const;
 export type Environment = (typeof environment)[number];
