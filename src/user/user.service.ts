@@ -22,7 +22,7 @@ export class UserService {
     if (user == null) {
       user = this.userRepository.create(userDto);
     } else {
-      Object.assign(userDto, user);
+      Object.assign(user, userDto);
     }
 
     await this.userRepository.flush();

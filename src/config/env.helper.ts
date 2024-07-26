@@ -11,5 +11,5 @@ export const getNodeEnv: Environment = (() => {
 })();
 
 export const ignoreEnvFile: boolean = (() => {
-  return getNodeEnv == 'development';
+  return getNodeEnv != 'development';
 })();
